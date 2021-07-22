@@ -18,6 +18,13 @@ body {
   z-index: 0;
 }
 
+.title {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3rem;
+}
+
 .main-box {
   background-color: $box-background;
   height: 85vh;
@@ -46,9 +53,10 @@ body {
   padding: 15px;
 }
 
-.title {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 3rem;
+.content-container {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  background-color: grey;
+  height: 95%;
 }
