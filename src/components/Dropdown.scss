@@ -1,0 +1,38 @@
+.dropdown-parent {
+  width: 100%;
+  position: relative;
+}
+
+.dropdown-button {
+  background-color: #fff;
+  text-align: center;
+  border: none;
+  outline: none;
+  border-radius: .25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  font-weight: 400;
+  display: inline-block;
+  box-shadow: -2px 2px 0px #000;
+  &:hover{
+    background-color: #eee;
+  }
+  &:active{
+    background-color: #bbb;
+    box-shadow: none;
+    transform: translate(-1px, 1px);
+  }
+  transition: background-color 0.5s,
+              tranform 0.5s,
+              box-shadow 0.5s;
+}
+
+.dropdown-menu{
+  visibility: hidden;
+  display: flex;
+  flex-flow: column wrap;
+  &.visible{
+    visibility: visible;
+  }
+}

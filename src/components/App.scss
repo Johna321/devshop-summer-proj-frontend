@@ -1,8 +1,54 @@
+$parent-background: #dee2e6;
+$box-background: #343a40;
 
 body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: sans-serif;
+  font-size: 14px;
 }
 
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $parent-background;
+  z-index: 0;
+}
 
+.main-box {
+  background-color: $box-background;
+  height: 85vh;
+  width: 85vh;
+  box-shadow: -1px 1px 0px #222,
+              -2px 2px 0px #222,
+              -3px 3px 0px #222,
+              -4px 4px 0px #222,
+              -5px 5px 0px #222,
+              -6px 6px 0px #222,
+              -7px 7px 0px #222,
+              -8px 8px 0px #222,
+              -9px 9px 0px #222,
+              -10px 10px 0px #222,
+              -11px 11px 0px #222,
+              -12px 12px 0px #222,
+              -13px 13px 0px #222,
+              -14px 14px 0px #222,
+              -15px 15px 0px #222;
+              //-16px 16px 0px #222,
+              //-17px 17px 0px #222,
+              //-18px 18px 0px #222,
+              //-19px 19px 0px #222,
+              //-20px 20px 0px #222;
+  margin: 10px;
+  padding: 15px;
+}
+
+.title {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3rem;
+}
