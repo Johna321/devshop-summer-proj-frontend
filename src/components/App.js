@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import './App.scss';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
@@ -15,20 +14,16 @@ const App = () => {
     setOption(name);
   };
 
-  const fetchData = async() => {
-    const { data } = await axios.get('http://localhost:3001/route2');
-    console.log(data);
-  };
-
   const mainComponent = () => {
-    if (option === 'Translate'){
-      return <Translate />;
-    }
-    if (option === 'Text-to-speech'){
-      return <TextToSpeech />;
-    }
-    if (option === 'Image classifier'){
-      return <ImageClassifier />;
+    switch(option){
+      case 'Translate':
+        return <Translate />;
+      case 'Text-to-speech':
+        return <TextToSpeech />;
+      case 'Image classifier':
+        return <ImageClassifier />;
+      default:
+        return <h1>Error</h1>
     }
   };
   

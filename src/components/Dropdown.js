@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Dropdown.scss';
 
 const Dropdown = ({ option, toggled, setToggled, setOption, updateDropdown }) => {
-  //const [toggled, setToggled] = useState(false);
-  //const [option, setOption] = useState('Translate')
-  //
-  //const updateDropdown = (name) => {
-  //  setToggled(false);
-  //  setOption(name);
-  //};
-
   return(
     <div className="dropdown-parent">
       <button 
