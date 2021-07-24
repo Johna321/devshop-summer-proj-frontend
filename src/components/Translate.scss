@@ -1,0 +1,21 @@
+.translate-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.translate-box {
+  background-color: #000;
+  height: 45%;
+  width: 95%;
+  font-family: Hack, Courier New, monospace;
+  padding: 10px;
+  color: #00ff00;
+  caret-shape: block;
+  outline: none;
+  &::selection {
+    background: #00ff00;
+  }
+}
