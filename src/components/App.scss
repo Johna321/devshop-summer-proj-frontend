@@ -16,7 +16,9 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: $parent-background;
+  //background-color: $parent-background;
+  background-image: url('../tree.jpg');
+  background-size: cover;
   z-index: 0;
 }
 

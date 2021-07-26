@@ -31,7 +31,7 @@ const App = () => {
     <div>
       <div className="parent">
         <div className="title">
-          Pear.
+          Tree
         </div>
         <div className="main-box">
           <Dropdown 
