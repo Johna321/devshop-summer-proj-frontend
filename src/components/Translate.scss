@@ -8,16 +8,12 @@
 
 .translate-box {
   background-color: #000;
-  max-height: 45%;
-  max-width: 95%;
   width: 95%;
   height: 45%;
   font-family: Hack, Courier New, monospace;
   padding: 10px;
   color: #00ff00;
   overflow-y: scroll;
-  box-sizing: content-box;
-  white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;
   caret-shape: block;
