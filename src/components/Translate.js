@@ -3,7 +3,7 @@ import './Translate.scss';
 
 const Translate = () => {
   const [text, setText] = useState('');
-  const onTextChange = (e) => {
+  const onTextChange = e => {
     setText(e.target.value);
   }
   return(

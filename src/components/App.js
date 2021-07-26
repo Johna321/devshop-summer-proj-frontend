@@ -29,10 +29,10 @@ const App = () => {
   
   return (
     <div>
-      <div className="title">
-        <b>Pear.</b>
-      </div>
       <div className="parent">
+        <div className="title">
+          Pear.
+        </div>
         <div className="main-box">
           <Dropdown 
             option={option} 

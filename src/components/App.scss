@@ -1,5 +1,6 @@
-$parent-background: #dee2e6;
-$box-background: #343a40;
+$parent-background: #111;
+$box-shadow: #133380;
+$box-background: #2a60e0;
 
 body {
   box-sizing: border-box;
@@ -11,6 +12,7 @@ body {
 
 .parent {
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -19,44 +21,87 @@ body {
 }
 
 .title {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  //position: absolute;
+  //right: 10px;
+  //top: 25px;
+  //transform: translate(-50%, 50%);
   font-size: 3rem;
+  margin-left: 53.7vh;
+  box-shadow: -1px 1px 0px $box-shadow,
+              -2px 2px 0px $box-shadow,
+              -3px 3px 0px $box-shadow,
+              -4px 4px 0px $box-shadow,
+              -5px 5px 0px $box-shadow,
+              -6px 6px 0px $box-shadow,
+              -7px 7px 0px $box-shadow,
+              -8px 8px 0px $box-shadow,
+              -9px 9px 0px $box-shadow,
+              -10px 10px 0px $box-shadow,
+              -11px 11px 0px $box-shadow,
+              -12px 12px 0px $box-shadow,
+              -13px 13px 0px $box-shadow,
+              -14px 14px 0px $box-shadow,
+              -15px 15px 0px $box-shadow,
+              -16px 16px 0px $box-shadow,
+              -17px 17px 0px $box-shadow,
+              -18px 18px 0px $box-shadow,
+              -19px 19px 0px $box-shadow,
+              -20px 20px 0px $box-shadow;
+              //-21px 21px 0px $box-shadow;
+              //-22px 22px 0px $box-shadow;
+              //-23px 23px 0px $box-shadow,
+              //-24px 24px 0px $box-shadow,
+              //-25px 25px 0px $box-shadow;
+              
+  font-weight: 600;
+  padding: 10px; 
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: $box-background;
+  width: 21.25vh;
+  text-align: center;
 }
 
 .main-box {
   background-color: $box-background;
-  height: 85vh;
-  width: 85vh;
-  box-shadow: -1px 1px 0px #222,
-              -2px 2px 0px #222,
-              -3px 3px 0px #222,
-              -4px 4px 0px #222,
-              -5px 5px 0px #222,
-              -6px 6px 0px #222,
-              -7px 7px 0px #222,
-              -8px 8px 0px #222,
-              -9px 9px 0px #222,
-              -10px 10px 0px #222,
-              -11px 11px 0px #222,
-              -12px 12px 0px #222,
-              -13px 13px 0px #222,
-              -14px 14px 0px #222,
-              -15px 15px 0px #222;
-              //-16px 16px 0px #222,
-              //-17px 17px 0px #222,
-              //-18px 18px 0px #222,
-              //-19px 19px 0px #222,
-              //-20px 20px 0px #222;
-  margin: 10px;
+  height: 75vh;
+  width: 75vh;
+  box-shadow: -1px 1px 0px $box-shadow,
+              -2px 2px 0px $box-shadow,
+              -3px 3px 0px $box-shadow,
+              -4px 4px 0px $box-shadow,
+              -5px 5px 0px $box-shadow,
+              -6px 6px 0px $box-shadow,
+              -7px 7px 0px $box-shadow,
+              -8px 8px 0px $box-shadow,
+              -9px 9px 0px $box-shadow,
+              -10px 10px 0px $box-shadow,
+              -11px 11px 0px $box-shadow,
+              -12px 12px 0px $box-shadow,
+              -13px 13px 0px $box-shadow,
+              -14px 14px 0px $box-shadow,
+              -15px 15px 0px $box-shadow,
+              -16px 16px 0px $box-shadow,
+              -17px 17px 0px $box-shadow,
+              -18px 18px 0px $box-shadow,
+              -19px 19px 0px $box-shadow,
+              -20px 20px 0px $box-shadow;
+              //-21px 21px 0px $box-shadow,
+              //-22px 22px 0px $box-shadow;
+              //-23px 23px 0px $box-shadow,
+              //-24px 24px 0px $box-shadow,
+              //-25px 25px 0px $box-shadow,
+              //-26px 26px 0px $box-shadow,
+              //-27px 27px 0px $box-shadow,
+              //-28px 28px 0px $box-shadow,
+              //-29px 29px 0px $box-shadow,
+              //-30px 30px 0px $box-shadow;
   padding: 15px;
 }
 
 .content-container {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   flex-flow: column wrap;
-  background-color: grey;
   height: 95%;
 }
