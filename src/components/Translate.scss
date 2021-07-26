@@ -15,7 +15,11 @@
   font-family: Hack, Courier New, monospace;
   padding: 10px;
   color: #00ff00;
-  overflow: hidden;
+  overflow-y: scroll;
+  box-sizing: content-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
   caret-shape: block;
   outline: none;
   resize: none;

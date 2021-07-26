@@ -13,7 +13,7 @@ const Translate = () => {
         spellCheck="false"
         onChange={onTextChange}        
       />
-      <div className="translate-box">
+      <div style={{userSelect: 'none'}} className="translate-box">
         {text}
       </div>
     </div>
