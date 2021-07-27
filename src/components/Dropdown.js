@@ -1,8 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import './Dropdown.scss';
 
-const Dropdown = ({ option, options, toggled, setToggled, setOption, updateDropdown }) => {
+const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption, updateDropdown }) => {
   const ref = useRef();
+
+  if (!style){
+    style = {
+      parent: 'dropdown-parent',
+      button: 'dropdown-button',
+      menu: 'dropdown-menu'
+    }
+  }
 
   useEffect(() => {
     const onBodyClick = (event) => {
@@ -38,16 +46,16 @@ const Dropdown = ({ option, options, toggled, setToggled, setOption, updateDropd
   };
 
   return(
-    <div className="dropdown-parent">
+    <div className={style.parent}>
       <button 
         ref={ref}
-        className="dropdown-button"
+        className={style.button}
         onClick={() => toggled ? setToggled(false) : setToggled(true)}
       >
         {option}
-        <i className="dropdown icon" />
+        {icon ? <i className="dropdown icon" /> : ''}
       </button>
-      <div className={`dropdown-menu ${toggled ? 'visible' : ''}`}>
+      <div className={`${style.menu} ${toggled ? 'visible' : ''}`}>
         {generateOptions(options)}
       </div>
     </div>

@@ -9,9 +9,10 @@ const App = () => {
   const [toggled, setToggled] = useState(false);
   const [option, setOption] = useState('Translate')
   
-  const updateDropdown = (name) => {
+  const updateDropdown = async(name) => {
     setToggled(false);
     setOption(name);
+    
   };
 
   const mainComponent = () => {
@@ -35,6 +36,12 @@ const App = () => {
         </div>
         <div className="main-box">
           <Dropdown 
+            style={{
+              parent: 'dropdown-parent',
+              button: 'dropdown-button',
+              menu: 'dropdown-menu'
+            }}
+            icon
             option={option} 
             options={['Translate', 'Text-to-speech', 'Image classifier']}
             toggled={toggled}
