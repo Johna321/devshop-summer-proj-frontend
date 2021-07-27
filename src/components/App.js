@@ -36,6 +36,7 @@ const App = () => {
         <div className="main-box">
           <Dropdown 
             option={option} 
+            options={['Translate', 'Text-to-speech', 'Image classifier']}
             toggled={toggled}
             setOption={setOption}
             setToggled={setToggled}
