@@ -1,20 +1,25 @@
-import React,{ useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Translate.scss';
 import Dropdown from './Dropdown';
 
+const languages = {
+  'English': 'en',
+  'Spanish': 'es',
+  'French': 'fr',
+  'Japanese': 'ja'
+}
+
 const Translate = () => {
   const [text, setText] = useState('');
+  const [debouncedText, setDebouncedText] = useState(text);
+  const [outputText, setOutputText] = useState('')
 
   const [inputLang, setInputLang] = useState('English');
   const [toggledInput, setToggledInput] = useState(false);
 
   const [outputLang, setOutputLang] = useState('English');
   const [toggledOutput, setToggledOutput] = useState(false);
-
-  const onTextChange = e => {
-    setText(e.target.value);
-  }
 
   const updateInputLangDropdown = name => {
     setToggledInput(false);
@@ -26,15 +31,32 @@ const Translate = () => {
     setOutputLang(name);
   }
 
-  const fetchTranslation = async(e) => {
+  const fetchTranslation = async() => {
+    console.log(`fetching ${inputLang} ${outputLang} ${debouncedText}`);
     let { data } = await axios.post('http://localhost:3001/translate', {
-      input_lang: 'en',
-      output_lang: 'es',
-      original_text: e.target.value
+      input_lang: languages[inputLang],
+      output_lang: languages[outputLang],
+      original_text: debouncedText
     })
     console.log(data.translated_text);
-    setText(data.translated_text);
+    setOutputText(data.translated_text);
   }
+
+  useEffect(() => {
+    if (debouncedText){
+      fetchTranslation();
+    } else {
+      setOutputText('');
+    }
+  }, [debouncedText, inputLang, outputLang]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedText(text);
+    }, 1000);
+    
+    return () => clearTimeout(timeoutId);
+  }, [text]);
 
   return(
     <div className="translate-container">
@@ -42,8 +64,8 @@ const Translate = () => {
         <textarea 
           className="translate-text" 
           spellCheck="false"
-          onChange={fetchTranslation}        
           maxLength="806"
+          onChange={e => setText(e.target.value)}
         />
         <Dropdown 
           style={{
@@ -52,7 +74,7 @@ const Translate = () => {
             menu: 'translate-dropdown-menu'
           }}
           option={inputLang}
-          options={['English', 'Reverse', 'Spanish']}
+          options={Object.keys(languages)}
           toggled={toggledInput}
           setOption={setInputLang}
           setToggled={setToggledInput}
@@ -61,7 +83,7 @@ const Translate = () => {
       </div>
       <div className="translate-text-container">
         <div className="translate-text">
-          {text}
+          {outputText}
         </div>
         <Dropdown 
           style={{
@@ -70,7 +92,7 @@ const Translate = () => {
             menu: 'translate-dropdown-menu'
           }}
           option={outputLang}
-          options={['English', 'Reverse', 'Spanish']}
+          options={Object.keys(languages)}
           toggled={toggledOutput}
           setOption={setOutputLang}
           setToggled={setToggledOutput}
