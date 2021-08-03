@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './Dropdown.scss';
 
-const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption, updateDropdown }) => {
+const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption, updateDropdown, reverse }) => {
   const ref = useRef();
 
   if (!style){
@@ -32,6 +32,9 @@ const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption
   }, [setToggled]);
 
   const generateOptions = options => {
+    if (reverse){
+      options = options.reverse();
+    }
     return options.map(option => {
       return(
         <button 

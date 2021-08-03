@@ -11,8 +11,7 @@ const languages = {
   'Portuguese': 'pt',
   'Afrikaans': 'af',
   'Swahili': 'sw',
-  'Russian': 'ru',
-
+  'Russian': 'ru'
 }
 
 const Translate = () => {
@@ -57,6 +56,10 @@ const Translate = () => {
   }, [debouncedText, inputLang, outputLang]);
 
   useEffect(() => {
+    if (text && !debouncedText){
+      setOutputText('Loading...');
+    }
+
     const timeoutId = setTimeout(() => {
       setDebouncedText(text);
     }, 1000);
@@ -85,6 +88,7 @@ const Translate = () => {
           setOption={setInputLang}
           setToggled={setToggledInput}
           updateDropdown={updateInputLangDropdown}
+          reverse
         />
       </div>
       <div className="translate-text-container">
@@ -103,6 +107,7 @@ const Translate = () => {
           setOption={setOutputLang}
           setToggled={setToggledOutput}
           updateDropdown={updateOutputLangDropdown}
+          reverse
         />
       </div>
     </div>
