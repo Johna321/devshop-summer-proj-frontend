@@ -7,7 +7,12 @@ const languages = {
   'English': 'en',
   'Spanish': 'es',
   'French': 'fr',
-  'Japanese': 'ja'
+  'Japanese': 'ja',
+  'Portuguese': 'pt',
+  'Afrikaans': 'af',
+  'Swahili': 'sw',
+  'Russian': 'ru',
+
 }
 
 const Translate = () => {
@@ -31,18 +36,19 @@ const Translate = () => {
     setOutputLang(name);
   }
 
-  const fetchTranslation = async() => {
-    console.log(`fetching ${inputLang} ${outputLang} ${debouncedText}`);
-    let { data } = await axios.post('http://localhost:3001/translate', {
-      input_lang: languages[inputLang],
-      output_lang: languages[outputLang],
-      original_text: debouncedText
-    })
-    console.log(data.translated_text);
-    setOutputText(data.translated_text);
-  }
 
   useEffect(() => {
+    const fetchTranslation = async() => {
+      console.log(`fetching ${inputLang} ${outputLang} ${debouncedText}`);
+      let { data } = await axios.post('http://localhost:3001/translate', {
+        input_lang: languages[inputLang],
+        output_lang: languages[outputLang],
+        original_text: debouncedText
+      })
+      console.log(data.translated_text);
+      setOutputText(data.translated_text);
+    }
+
     if (debouncedText){
       fetchTranslation();
     } else {
@@ -63,7 +69,7 @@ const Translate = () => {
       <div className="translate-text-container">
         <textarea 
           className="translate-text" 
-          spellCheck="false"
+          //spellCheck="false"
           maxLength="806"
           onChange={e => setText(e.target.value)}
         />

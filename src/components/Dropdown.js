@@ -29,7 +29,7 @@ const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption
         capture: true
       });
     };
-  }, []);
+  }, [setToggled]);
 
   const generateOptions = options => {
     return options.map(option => {
