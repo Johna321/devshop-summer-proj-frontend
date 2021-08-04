@@ -14,7 +14,8 @@ const languages = {
   'Russian': 'ru'
 }
 
-const Translate = () => {
+const Translate = ({ fetchAudio }) => {
+
   const [text, setText] = useState('');
   const [debouncedText, setDebouncedText] = useState(text);
   const [outputText, setOutputText] = useState('')
@@ -24,6 +25,10 @@ const Translate = () => {
 
   const [outputLang, setOutputLang] = useState('English');
   const [toggledOutput, setToggledOutput] = useState(false);
+  const [transAudio, setTransAudio] = useState('');
+  
+  let audio1 = new Audio(`data:audio/mp3;base64,${transAudio}`);
+
 
   const updateInputLangDropdown = name => {
     setToggledInput(false);
@@ -35,16 +40,19 @@ const Translate = () => {
     setOutputLang(name);
   }
 
+  const synthesizeText = (input) => {
+    fetchAudio(input, 'Joey', setTransAudio);
+    console.log(transAudio);
+    audio1.play();
+  }
 
   useEffect(() => {
     const fetchTranslation = async() => {
-      console.log(`fetching ${inputLang} ${outputLang} ${debouncedText}`);
       let { data } = await axios.post('http://localhost:3001/translate', {
         input_lang: languages[inputLang],
         output_lang: languages[outputLang],
         original_text: debouncedText
       })
-      console.log(data.translated_text);
       setOutputText(data.translated_text);
     }
 
@@ -76,6 +84,13 @@ const Translate = () => {
           maxLength="806"
           onChange={e => setText(e.target.value)}
         />
+        <button
+          onClick={() => synthesizeText(text)}
+          className="translate-dropdown-button"
+          style={{left: 0, bottom: 0}}
+        >
+          <i className="volume up icon"/>
+        </button>
         <Dropdown 
           style={{
             parent: 'translate-dropdown-parent',
@@ -95,6 +110,13 @@ const Translate = () => {
         <div className="translate-text">
           {outputText}
         </div>
+        <button
+          className="translate-dropdown-button"
+          style={{left: 0, bottom: 0}}
+          onClick={() => synthesizeText(outputText)}
+        >
+          <i className="volume up icon"/>
+        </button>
         <Dropdown 
           style={{
             parent: 'translate-dropdown-parent',
@@ -110,6 +132,7 @@ const Translate = () => {
           reverse
         />
       </div>
+      {transAudio ? <audio id="audio1" preload="none" src={`data:audio/mp3;base64,${transAudio}`} autoPlay="autoplay" /> : ''}
     </div>
   );
 };

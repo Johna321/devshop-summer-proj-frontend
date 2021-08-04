@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Dropdown.scss';
 
 const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption, updateDropdown, reverse }) => {
+
   const ref = useRef();
+
+  const [stateOptions, setStateOptions] = useState(options);
+
 
   if (!style){
     style = {
@@ -31,10 +35,13 @@ const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption
     };
   }, [setToggled]);
 
-  const generateOptions = options => {
+  useEffect(() => {
     if (reverse){
-      options = options.reverse();
+      setStateOptions(stateOptions.reverse());
     }
+  }, [reverse, stateOptions]);
+
+  const generateOptions = options => {
     return options.map(option => {
       return(
         <button 
@@ -59,7 +66,7 @@ const Dropdown = ({ style, icon, option, options, toggled, setToggled, setOption
         {icon ? <i className="dropdown icon" /> : ''}
       </button>
       <div className={`${style.menu} ${toggled ? 'visible' : ''}`}>
-        {generateOptions(options)}
+        {generateOptions(stateOptions)}
       </div>
     </div>
   );

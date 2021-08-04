@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import './App.scss';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
@@ -15,12 +16,22 @@ const App = () => {
     
   };
 
+  const fetchAudio = async(text, voice, setAudio) => {
+    if (text){
+      const { data } = await axios.post('http://localhost:3001/tts', {
+        text: text,
+        voice_id: voice
+      });
+      setAudio(data.base64);
+    }
+  }
+
   const mainComponent = () => {
     switch(option){
       case 'Translate':
-        return <Translate />;
+        return <Translate fetchAudio={fetchAudio}/>;
       case 'Text-to-speech':
-        return <TextToSpeech />;
+        return <TextToSpeech fetchAudio={fetchAudio}/>;
       case 'Image classifier':
         return <ImageClassifier />;
       default:

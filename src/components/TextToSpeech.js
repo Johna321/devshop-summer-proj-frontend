@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TextToSpeech.scss';
-import axios from 'axios';
 import Dropdown from './Dropdown';
 
 const voices = [
@@ -22,7 +21,7 @@ const voices = [
   'Russell'
 ]
 
-const TextToSpeech = () => {
+const TextToSpeech = ({ fetchAudio }) => {
   const [audio, setAudio] = useState('');
   const [text, setText] = useState('');
   const [error, setError] = useState(false);
@@ -32,20 +31,6 @@ const TextToSpeech = () => {
   const updateVoiceDropdown = voice => {
     setToggled(false);
     setVoice(voice);
-  }
-
-  const fetchAudio = async() => {
-    if (text){
-      const { data } = await axios.post('http://localhost:3001/tts', {
-        text: text,
-        voice_id: voice
-      });
-      console.log(data.base64);
-      setAudio(data.base64);
-    } else {
-      setError(true);
-      setTimeout(() => {setError(false)}, 2500)
-    }
   }
 
   return(
@@ -78,7 +63,13 @@ const TextToSpeech = () => {
       <div className="textspeech-speech-container">
         <button 
           className="textspeech-button"
-          onClick={fetchAudio}
+          onClick={() => {
+            fetchAudio(text, voice, setAudio, setError);
+            if (!text){
+              setError(true);
+              setTimeout(() => {setError(false)}, 2500)
+            }
+          }}
         >
           <i className="volume up icon"/>
         </button>
