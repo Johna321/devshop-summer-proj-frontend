@@ -65,7 +65,7 @@ const Translate = () => {
     }, 1000);
     
     return () => clearTimeout(timeoutId);
-  }, [text]);
+  }, [text, debouncedText]);
 
   return(
     <div className="translate-container">
