@@ -76,7 +76,7 @@ const TextToSpeech = ({ fetchAudio }) => {
           <i className="volume up icon"/>
         </button>
         {audio ?  
-          <audio src={`data:audio/mp3;base64,${audio}`} controls />
+          <audio src={`data:audio/ogg;base64,${audio}`} controls />
           :
           ''}
       </div>

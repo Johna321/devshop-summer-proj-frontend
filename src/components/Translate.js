@@ -4,14 +4,14 @@ import './Translate.scss';
 import Dropdown from './Dropdown';
 
 const languages = {
-  'English': 'en',
-  'Spanish': 'es',
-  'French': 'fr',
-  'Japanese': 'ja',
-  'Portuguese': 'pt',
-  'Afrikaans': 'af',
-  'Swahili': 'sw',
-  'Russian': 'ru'
+  'English': {code: 'en', langVoice: 'Joey'},
+  'Spanish': {code: 'es', langVoice: 'Conchita'},
+  'French': {code: 'fr', langVoice: 'Mathieu'},
+  'Japanese': {code: 'ja', langVoice: 'Mizuki'},
+  'Portuguese': {code: 'pt', langVoice: 'Ricardo'},
+  'Afrikaans': {code: 'af', langVoice: 'Joey'},
+  'Swahili': {code: 'sw', langVoice: 'Joey'},
+  'Russian': {code: 'ru', langVoice: 'Tatyana'}
 }
 
 const Translate = ({ fetchAudio }) => {
@@ -36,17 +36,17 @@ const Translate = ({ fetchAudio }) => {
     setOutputLang(name);
   }
 
-  const synthesizeText = async(input) => {
-    let audio = await fetchAudio(input, 'Joey');
-    let audio1 = new Audio(`data:audio/mp3;base64,${audio}`);
+  const synthesizeText = async(input, lang) => {
+    let audio = await fetchAudio(input, languages[lang].langVoice);
+    let audio1 = new Audio(`data:audio/ogg;base64,${audio}`);
     await audio1.play();
   }
 
   useEffect(() => {
     const fetchTranslation = async() => {
       let { data } = await axios.post('http://localhost:3001/translate', {
-        input_lang: languages[inputLang],
-        output_lang: languages[outputLang],
+        input_lang: languages[inputLang].code,
+        output_lang: languages[outputLang].code,
         original_text: debouncedText
       })
       setOutputText(data.translated_text);
@@ -81,7 +81,7 @@ const Translate = ({ fetchAudio }) => {
           onChange={e => setText(e.target.value)}
         />
         <button
-          onClick={() => synthesizeText(text)}
+          onClick={() => synthesizeText(text, inputLang)}
           className="translate-dropdown-button"
           style={{left: 5, bottom: 5}}
         >
@@ -109,7 +109,7 @@ const Translate = ({ fetchAudio }) => {
         <button
           className="translate-dropdown-button"
           style={{left: 5, bottom: 5}}
-          onClick={() => synthesizeText(outputText)}
+          onClick={() => synthesizeText(outputText, outputLang)}
         >
           <i className="volume up icon"/>
         </button>
