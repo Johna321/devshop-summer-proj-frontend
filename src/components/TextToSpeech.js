@@ -58,16 +58,18 @@ const TextToSpeech = ({ fetchAudio }) => {
         <textarea 
           className="translate-text"
           onChange={(e) => setText(e.target.value)}
+          spellCheck="false"
         />
       </div>
       <div className="textspeech-speech-container">
         <button 
           className="textspeech-button"
-          onClick={() => {
-            fetchAudio(text, voice, setAudio, setError);
+          onClick={async() => {
+            let response = await fetchAudio(text, voice);
+            setAudio(response);
             if (!text){
               setError(true);
-              setTimeout(() => {setError(false)}, 2500)
+              setTimeout(() => {setError(false)}, 2500);
             }
           }}
         >
@@ -84,6 +86,3 @@ const TextToSpeech = ({ fetchAudio }) => {
 
 export default TextToSpeech;
 
-//<audio src={`data:audio/mp3;base64,${audio}`} controls>
-//  This browser does not support audio
-//</audio> 

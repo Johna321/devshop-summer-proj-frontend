@@ -25,10 +25,6 @@ const Translate = ({ fetchAudio }) => {
 
   const [outputLang, setOutputLang] = useState('English');
   const [toggledOutput, setToggledOutput] = useState(false);
-  const [transAudio, setTransAudio] = useState('');
-  
-  let audio1 = new Audio(`data:audio/mp3;base64,${transAudio}`);
-
 
   const updateInputLangDropdown = name => {
     setToggledInput(false);
@@ -40,10 +36,10 @@ const Translate = ({ fetchAudio }) => {
     setOutputLang(name);
   }
 
-  const synthesizeText = (input) => {
-    fetchAudio(input, 'Joey', setTransAudio);
-    console.log(transAudio);
-    audio1.play();
+  const synthesizeText = async(input) => {
+    let audio = await fetchAudio(input, 'Joey');
+    let audio1 = new Audio(`data:audio/mp3;base64,${audio}`);
+    await audio1.play();
   }
 
   useEffect(() => {
@@ -70,7 +66,7 @@ const Translate = ({ fetchAudio }) => {
 
     const timeoutId = setTimeout(() => {
       setDebouncedText(text);
-    }, 1000);
+    }, 500);
     
     return () => clearTimeout(timeoutId);
   }, [text, debouncedText]);
@@ -80,14 +76,14 @@ const Translate = ({ fetchAudio }) => {
       <div className="translate-text-container">
         <textarea 
           className="translate-text" 
-          //spellCheck="false"
-          maxLength="806"
+          spellCheck="false"
+          maxLength="744"
           onChange={e => setText(e.target.value)}
         />
         <button
           onClick={() => synthesizeText(text)}
           className="translate-dropdown-button"
-          style={{left: 0, bottom: 0}}
+          style={{left: 5, bottom: 5}}
         >
           <i className="volume up icon"/>
         </button>
@@ -112,7 +108,7 @@ const Translate = ({ fetchAudio }) => {
         </div>
         <button
           className="translate-dropdown-button"
-          style={{left: 0, bottom: 0}}
+          style={{left: 5, bottom: 5}}
           onClick={() => synthesizeText(outputText)}
         >
           <i className="volume up icon"/>
@@ -132,7 +128,6 @@ const Translate = ({ fetchAudio }) => {
           reverse
         />
       </div>
-      {transAudio ? <audio id="audio1" preload="none" src={`data:audio/mp3;base64,${transAudio}`} autoPlay="autoplay" /> : ''}
     </div>
   );
 };

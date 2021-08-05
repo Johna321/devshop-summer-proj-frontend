@@ -16,13 +16,13 @@ const App = () => {
     
   };
 
-  const fetchAudio = async(text, voice, setAudio) => {
+  const fetchAudio = async(text, voice) => {
     if (text){
       const { data } = await axios.post('http://localhost:3001/tts', {
         text: text,
         voice_id: voice
       });
-      setAudio(data.base64);
+      return data.base64;
     }
   }
 
