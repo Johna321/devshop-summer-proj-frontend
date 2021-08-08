@@ -1,0 +1,17 @@
+.speechtext-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.speechtext-input-container {
+  width: 95%; 
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

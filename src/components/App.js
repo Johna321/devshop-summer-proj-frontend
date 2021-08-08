@@ -4,6 +4,7 @@ import './App.scss';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
 import TextToSpeech from './TextToSpeech';
+import SpeechToText from './SpeechToText';
 import ImageClassifier from './ImageClassifier';
 
 const App = () => {
@@ -32,6 +33,8 @@ const App = () => {
         return <Translate fetchAudio={fetchAudio}/>;
       case 'Text-to-speech':
         return <TextToSpeech fetchAudio={fetchAudio}/>;
+      case 'Speech-to-text':
+        return <SpeechToText />;
       case 'Image classifier':
         return <ImageClassifier />;
       default:
@@ -54,7 +57,7 @@ const App = () => {
             }}
             icon
             option={option} 
-            options={['Translate', 'Text-to-speech', 'Image classifier']}
+            options={['Translate', 'Text-to-speech', 'Speech-to-text', 'Image classifier']}
             toggled={toggled}
             setOption={setOption}
             setToggled={setToggled}
