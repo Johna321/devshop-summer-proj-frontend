@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from 'react';
+import axios from 'axios';
 import DragAndDrop from './DragAndDrop';
 import './SpeechToText.scss';
 
@@ -23,6 +24,16 @@ const SpeechToText = () => {
     inDropZone: false,
     fileList: [] 
   });
+
+  const uploadFile = async() => {
+    console.log(data);
+    let curFile = new FormData();
+    curFile.append("multipart/form-data", data.fileList[0]);
+    let response = await axios.post(
+      'http://localhost:3001/upload', 
+      curFile
+    );
+  };
   
   return(
     <div className="speechtext-container">
@@ -31,7 +42,7 @@ const SpeechToText = () => {
       </div>
       <div className="textspeech-text-container">
         <div className="translate-text">
-          {text}
+          <button onClick={uploadFile}>hello</button>
         </div>
       </div>
     </div>

@@ -7,12 +7,12 @@ const DragAndDrop = ({ data, dispatch }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    let files = [...e.dataTransfer.files];
+    let files = [...e.target.files];
     if (files && files.length > 0){
       const existingFiles = data.fileList.map(f => f.name);
-      files = files.filter(f => !existingFiles.includes(f.name));
+      //files = files.filter(f => !existingFiles.includes(f.name));
       dispatch({ type: 'ADD_FILE_TO_LIST', files });
-      e.dataTransfer.clearData();
+      //e.target.clearData();
       dispatch({ type: 'SET_DROP_DEPTH', dropDepth: 0 });
       dispatch({ type: 'SET_IN_DROP_ZONE', inDropZone: false });
     }
@@ -47,8 +47,9 @@ const DragAndDrop = ({ data, dispatch }) => {
       onDragEnter={e => handleDragEnter(e)}
       onDragLeave={e => handleDragLeave(e)}
     >
-      <input type="file" className="drag-drop-file-input" />
+      <input type="file" onChange={handleDrop} className="drag-drop-file-input" />
       Drag speech here 
+
     </div>
   );
 };
