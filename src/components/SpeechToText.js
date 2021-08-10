@@ -11,7 +11,7 @@ const SpeechToText = () => {
       case 'SET_IN_DROP_ZONE':
         return { ...state, inDropZone: action.inDropZone };
       case 'ADD_FILE_TO_LIST':
-        return { ...state, fileList: state.fileList.concat(action.files) };
+        return { ...state, file: action.files[0] };
       default:
         return state;
     }
@@ -20,24 +20,21 @@ const SpeechToText = () => {
   const [data, dispatch] = useReducer(reducer, { 
     dropDepth: 0,
     inDropZone: false,
-    fileList: [] 
+    file:  null
   });
 
   const uploadFile = async() => {
     console.log(data);
     let curFile = new FormData();
-    curFile.append("multipart/form-data", data.fileList[0]);
-    console.log(data.fileList[0].name)
+    curFile.append("multipart/form-data", data.file);
+    console.log(curFile);
     let response = await axios.post(
       'http://localhost:3001/upload', 
-      curFile,
-      {
-        name: data.fileList[0].name
-      }
+      curFile
     );
     console.log(response);
   };
-  
+
   return(
     <div className="speechtext-container">
       <div className="speechtext-input-container">
@@ -46,6 +43,7 @@ const SpeechToText = () => {
       <div className="textspeech-text-container">
         <div className="translate-text">
           <button onClick={uploadFile}>hello</button>
+          {data.file ? data.file.name : ''}
         </div>
       </div>
     </div>
