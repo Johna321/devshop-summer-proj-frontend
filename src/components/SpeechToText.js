@@ -1,11 +1,9 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import DragAndDrop from './DragAndDrop';
 import './SpeechToText.scss';
 
 const SpeechToText = () => {
-  const [text, setText] = useState('');
-
   const reducer = (state, action) => {
     switch(action.type){
       case 'SET_DROP_DEPTH':
@@ -29,10 +27,15 @@ const SpeechToText = () => {
     console.log(data);
     let curFile = new FormData();
     curFile.append("multipart/form-data", data.fileList[0]);
+    console.log(data.fileList[0].name)
     let response = await axios.post(
       'http://localhost:3001/upload', 
-      curFile
+      curFile,
+      {
+        name: data.fileList[0].name
+      }
     );
+    console.log(response);
   };
   
   return(

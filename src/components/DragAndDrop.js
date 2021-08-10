@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DragAndDrop.scss';
 
 const DragAndDrop = ({ data, dispatch }) => {
@@ -9,7 +9,7 @@ const DragAndDrop = ({ data, dispatch }) => {
 
     let files = [...e.target.files];
     if (files && files.length > 0){
-      const existingFiles = data.fileList.map(f => f.name);
+      //const existingFiles = data.fileList.map(f => f.name);
       //files = files.filter(f => !existingFiles.includes(f.name));
       dispatch({ type: 'ADD_FILE_TO_LIST', files });
       //e.target.clearData();
