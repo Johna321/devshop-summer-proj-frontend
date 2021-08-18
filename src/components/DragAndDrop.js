@@ -46,7 +46,7 @@ const DragAndDrop = ({ data, dispatch }) => {
 
   return(
     <div 
-      className="drag-drop-zone"
+      className={`drag-drop-zone ${data.inDropZone ? "active" : ""}`}
       onDrop={e => handleDrop(e)}
       onDragOver={e => handleDragOver(e)}
       onDragEnter={e => handleDragEnter(e)}
@@ -54,8 +54,9 @@ const DragAndDrop = ({ data, dispatch }) => {
     >
       <input type="file" id="file-input" style={{ display: 'none' }} onChange={handleFileInput} />
       <label htmlFor="file-input" className="file-input-label">
-        {data.file ? data.file.name : 'upload'}
+        <div className="upload-button">Choose file</div>
       </label>
+      {data.file ? data.file.name : 'No file selected'}
     </div>
   );
 };

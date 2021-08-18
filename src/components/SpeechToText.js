@@ -22,17 +22,24 @@ const SpeechToText = () => {
     inDropZone: false,
     file:  null
   });
-
+  
   const uploadFile = async() => {
-    console.log(data);
     let curFile = new FormData();
     curFile.append("multipart/form-data", data.file);
-    console.log(curFile);
-    let response = await axios.post(
+    let s3Response = await axios.post(
       'http://localhost:3001/upload', 
       curFile
     );
-    console.log(response);
+    console.log(s3Response.data);
+    if (s3Response.data){
+      let response = await axios.post(
+        'http://localhost:3001/transcribe',
+        {
+          filename: data.file.name
+        }
+      )
+      console.log(response);
+    }
   };
 
   return(
@@ -42,8 +49,7 @@ const SpeechToText = () => {
       </div>
       <div className="textspeech-text-container">
         <div className="translate-text">
-          <button onClick={uploadFile}>hello</button>
-          {data.file ? data.file.name : ''}
+          <button onClick={uploadFile}>upload</button>
         </div>
       </div>
     </div>
